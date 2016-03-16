@@ -1,9 +1,10 @@
 # Multidimensional Quantity Ontology
 
+This project contains the sources of the Multidimensional Quantity Ontology website http://w3id.org/multidimensional-quantity/ .
+
 See:
 
-- [The Ontology](resource/Ontology)
-- [The Energy Vocabulary](resource/EnergyVocabulary)
-- [The Specification](spec.html)
-- [The code of this web application, where one may edit vocabularies for new domains.](https://github.com/thesmartenergy/mdq-ontology-site)
+- [The Ontology](http://w3id.org/multidimensional-quantity/resource/Ontology)
+- [The Energy Vocabulary](http://w3id.org/multidimensional-quantity/resource/EnergyVocabulary)
+- [The Specification](http://w3id.org/multidimensional-quantity/spec.html)
 
