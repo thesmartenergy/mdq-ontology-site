@@ -1,0 +1,280 @@
+# Copyright 2016 ITEA 12004 SEAS Project.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, 
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX fn: <http://www.w3.org/2005/xpath-functions#> 
+PREFIX vann: <http://purl.org/vocab/vann/> 
+PREFIX voaf: <http://purl.org/vocommons/voaf#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/terms/> 
+PREFIX vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> 
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX lindt: <http://purl.org/NET/lindt#>
+
+PREFIX mdq: <http://w3id.org/multidimensional-quantity/resource/>
+
+BASE <http://w3id.org/multidimensional-quantity/resource/>
+
+GENERATE {
+
+# classes
+
+    ?XxxFacetUri a mdq:Facet ;
+      rdfs:label ?XxxFacetLabel ;
+      rdfs:comment ?XxxFacetComment ;
+      mdq:facetDimension ?DddDimensionUri ;
+      mdq:projectionProperty ?xxxProjectionUri ;
+      mdq:projectionSubDistributionOfProperty ?xxxProjectionSubDistributionOfUri ;
+      mdq:projectionContainsProperty ?xxxProjectionContainsUri ;
+      mdq:projectionExcludesProperty ?xxxProjectionExcludesUri ;
+      mdq:projectionEmptyClass ?XxxProjectionEmptyUri ;
+      mdq:projectionFullClass ?XxxProjectionFullUri ;
+      mdq:projectionValueProperty ?xxxProjectionValueUri ;
+      mdq:projectionLowerBoundProperty ?xxxProjectionLowerBoundUri ;
+      mdq:projectionUpperBoundProperty ?xxxProjectionUpperBoundUri ;
+      mdq:projectionIntervalClass ?XxxProjectionIntervalUri ;
+      mdq:projectionMinimumProperty ?xxxProjectionMinimumUri ;
+      mdq:projectionMaximumProperty ?xxxProjectionMaximumUri ;
+      mdq:projectionRangeProperty ?xxxProjectionRangeUri ;
+      mdq:projectionMinimumIncludedProperty ?xxxProjectionMinimumIncludedUri ;
+      mdq:projectionMinimumExcludedProperty ?xxxProjectionMinimumExcludedUri ;
+      mdq:projectionMaximumIncludedProperty ?xxxProjectionMaximumIncludedUri ;
+      mdq:projectionMaximumExcludedProperty ?xxxProjectionMaximumExcludedUri ;
+      mdq:seriesProperty ?xxxSeriesUri ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionUri a owl:ObjectProperty ;
+      rdfs:label ?xxxProjectionLabel ;
+      rdfs:comment ?xxxProjectionComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      rdfs:range ?DddDistributionUri ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+
+
+    ?xxxProjectionSubDistributionOfUri a owl:ObjectProperty ;
+      rdfs:label ?xxxProjectionSubDistributionOfLabel ;
+      rdfs:comment ?xxxProjectionSubDistributionOfComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      rdfs:range mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionContainsUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionContainsLabel ;
+      rdfs:comment ?xxxProjectionContainsComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionExcludesUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionExcludesLabel ;
+      rdfs:comment ?xxxProjectionExcludesComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?XxxProjectionEmptyUri a owl:Class ;
+      rdfs:label ?XxxProjectionEmptyLabel ;
+      rdfs:comment ?XxxProjectionEmptyComment ;
+      rdfs:subClassOf mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?XxxProjectionFullUri a owl:Class ;
+      rdfs:label ?XxxProjectionFullLabel ;
+      rdfs:comment ?XxxProjectionFullComment ;
+      rdfs:subClassOf mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionValueUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionValueLabel ;
+      rdfs:comment ?xxxProjectionValueComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+      
+    ?xxxProjectionLowerBoundUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionLowerBoundLabel ;
+      rdfs:comment ?xxxProjectionLowerBoundComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+      
+    ?xxxProjectionUpperBoundUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionUpperBoundLabel ;
+      rdfs:comment ?xxxProjectionUpperBoundComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?XxxProjectionIntervalUri a owl:Class ;
+      rdfs:label ?XxxProjectionIntervalLabel ;
+      rdfs:comment ?XxxProjectionIntervalComment ;
+      rdfs:subClassOf mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionMinimumUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionMinimumLabel ;
+      rdfs:comment ?xxxProjectionMinimumComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+      
+    ?xxxProjectionMaximumUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionMaximumLabel ;
+      rdfs:comment ?xxxProjectionMaximumComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+      
+    ?xxxProjectionRangeUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionRangeLabel ;
+      rdfs:comment ?xxxProjectionRangeComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri .      
+
+    ?xxxProjectionMinimumIncludedUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionMinimumIncludedLabel ;
+      rdfs:comment ?xxxProjectionMinimumIncludedComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionMinimumExcludedUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionMinimumExcludedLabel ;
+      rdfs:comment ?xxxProjectionMinimumExcludedComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionMaximumIncludedUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionMaximumIncludedLabel ;
+      rdfs:comment ?xxxProjectionMaximumIncludedComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxProjectionMaximumExcludedUri a owl:DatatypeProperty ;
+      rdfs:label ?xxxProjectionMaximumExcludedLabel ;
+      rdfs:comment ?xxxProjectionMaximumExcludedComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?xxxSeriesUri a owl:ObjectProperty ;
+      rdfs:label ?xxxSeriesLabel ;
+      rdfs:comment ?xxxSeriesComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      rdfs:range mdq:FacetedSpaceSeries ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+
+
+} WHERE {
+
+  BIND( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.facet" ) AS ?Xxx )
+  BIND( CONCAT( LCASE( SUBSTR( ?Xxx , 1 , 1) ) , SUBSTR( ?Xxx , 2) ) AS ?xxx )
+
+  BIND( CONCAT( ?Xxx , "Facet" ) AS ?XxxFacetLabel )
+  BIND( URI( CONCAT( ?mdq , ?XxxFacetLabel ) ) AS ?XxxFacetUri )
+  BIND( STRLANG( REPLACE( "The Xxx facet.", "Xxx", ?Xxx ) , "en" ) AS ?XxxFacetComment )
+
+  BIND( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.dimension" ) AS ?Ddd )
+  BIND( URI( CONCAT( ?mdq , ?Ddd , "Dimension" ) ) AS ?DddDimensionUri )
+  BIND( URI( CONCAT( ?mdq , ?Ddd , "Distribution" ) ) AS ?DddDistributionUri )
+
+  BIND( CONCAT( ?xxx , "Projection" ) AS ?xxxProjectionLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionLabel ) ) AS ?xxxProjectionUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to its projection of facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionComment )
+
+
+  BIND( CONCAT( ?xxx , "ProjectionSubDistributionOf" ) AS ?xxxProjectionSubDistributionOfLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionSubDistributionOfLabel ) ) AS ?xxxProjectionSubDistributionOfUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to another F-space that has a bigger projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionSubDistributionOfComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionContains" ) AS ?xxxProjectionContainsLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionContainsLabel ) ) AS ?xxxProjectionContainsUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to a value that is contained in projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionContainsComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionExcludes" ) AS ?xxxProjectionExcludesLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionExcludesLabel ) ) AS ?xxxProjectionExcludesUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to a value that is excluded in projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionExcludesComment )
+
+  BIND( CONCAT( ?Xxx , "ProjectionEmpty" ) AS ?XxxProjectionEmptyLabel )
+  BIND( URI( CONCAT( ?mdq , ?XxxProjectionEmptyLabel ) ) AS ?XxxProjectionEmptyUri )
+  BIND( STRLANG( REPLACE( "The class of F-values that have an empty projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?XxxProjectionEmptyComment )
+
+  BIND( CONCAT( ?Xxx , "ProjectionFull" ) AS ?XxxProjectionFullLabel )
+  BIND( URI( CONCAT( ?mdq , ?XxxProjectionFullLabel ) ) AS ?XxxProjectionFullUri )
+  BIND( STRLANG( REPLACE( "The class of F-values that have a full projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?XxxProjectionFullComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionValue" ) AS ?xxxProjectionValueLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionValueLabel ) ) AS ?xxxProjectionValueUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the single value of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionValueComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionLowerBound" ) AS ?xxxProjectionLowerBoundLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionLowerBoundLabel ) ) AS ?xxxProjectionLowerBoundUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the lower bound of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionLowerBoundComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionUpperBound" ) AS ?xxxProjectionUpperBoundLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionUpperBoundLabel ) ) AS ?xxxProjectionUpperBoundUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the upper bound of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionUpperBoundComment )
+
+  BIND( CONCAT( ?Xxx , "ProjectionInterval" ) AS ?XxxProjectionIntervalLabel )
+  BIND( URI( CONCAT( ?mdq , ?XxxProjectionIntervalLabel ) ) AS ?XxxProjectionIntervalUri )
+  BIND( STRLANG( REPLACE( "The class of F-space whose projection on facet Xxx is an interval.", "Xxx", ?Xxx ) , "en" ) AS ?XxxProjectionIntervalComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionMinimum" ) AS ?xxxProjectionMinimumLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionMinimumLabel ) ) AS ?xxxProjectionMinimumUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the minimum of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionMinimumComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionMaximum" ) AS ?xxxProjectionMaximumLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionMaximumLabel ) ) AS ?xxxProjectionMaximumUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the maximum of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionMaximumComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionRange" ) AS ?xxxProjectionRangeLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionRangeLabel ) ) AS ?xxxProjectionRangeUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the range of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionRangeComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionMinimumIncluded" ) AS ?xxxProjectionMinimumIncludedLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionMinimumIncludedLabel ) ) AS ?xxxProjectionMinimumIncludedUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the included minimum of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionMinimumIncludedComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionMinimumExcluded" ) AS ?xxxProjectionMinimumExcludedLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionMinimumExcludedLabel ) ) AS ?xxxProjectionMinimumExcludedUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the excluded minimum of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionMinimumExcludedComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionMaximumIncluded" ) AS ?xxxProjectionMaximumIncludedLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionMaximumIncludedLabel ) ) AS ?xxxProjectionMaximumIncludedUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the included maximum of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionMaximumIncludedComment )
+
+  BIND( CONCAT( ?xxx , "ProjectionMaximumExcluded" ) AS ?xxxProjectionMaximumExcludedLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxProjectionMaximumExcludedLabel ) ) AS ?xxxProjectionMaximumExcludedUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to the excluded maximum of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionMaximumExcludedComment )
+
+  BIND( CONCAT( ?Ddd , "Series" ) AS ?xxxSeriesLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxSeriesLabel ) ) AS ?xxxSeriesUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to a F-space series along facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxSeriesComment )
+
+}

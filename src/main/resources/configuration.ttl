@@ -1,0 +1,27 @@
+# Copyright 2016 ITEA 12004 SEAS Project.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+@prefix lm: <http://jena.hpl.hp.com/2004/08/location-mapping#> .
+
+[] lm:mapping
+   [ lm:name "http://w3id.org/multidimensional-quantity/resource/Ontology" ; lm:altName "ontology/Ontology.ttl" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/resource/EnergyVocabulary" ; lm:altName "vocab/EnergyVocabulary.json" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/query/Connection" ; lm:altName "query/Connection.rqg" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/query/ConnectionPoint" ; lm:altName "query/ConnectionPoint.rqg" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/query/Dimension" ; lm:altName "query/Dimension.rqg" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/query/Facet" ; lm:altName "query/Facet.rqg" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/query/System" ; lm:altName "query/System.rqg" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/query/Unit" ; lm:altName "query/Unit.rqg" ] ,
+   [ lm:name "http://w3id.org/multidimensional-quantity/query/Vocabulary" ; lm:altName "query/Vocabulary.rqg" ]
+   .

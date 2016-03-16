@@ -1,0 +1,132 @@
+# Copyright 2016 ITEA 12004 SEAS Project.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, 
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX fn: <http://www.w3.org/2005/xpath-functions#> 
+PREFIX vann: <http://purl.org/vocab/vann/> 
+PREFIX voaf: <http://purl.org/vocommons/voaf#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/terms/> 
+PREFIX vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> 
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX lindt: <http://purl.org/NET/lindt#>
+
+PREFIX mdq: <http://w3id.org/multidimensional-quantity/resource/>
+
+BASE <http://w3id.org/multidimensional-quantity/resource/>
+
+GENERATE {
+
+  ?DddDimensionUri a mdq:Dimension ;
+    rdfs:label ?DddDimensionLabel ;
+    rdfs:comment ?DddDimensionComment ;
+    rdfs:subClassOf mdq:Dimension ;
+    mdq:unit ?unit ;
+    mdq:deltaUnit ?deltaUnit ;
+    mdq:additiveIdentityValue ?additiveIdentityValue ;
+    mdq:primitiveOfProperty ?dddPrimitiveOfUri ;
+    mdq:derivativeOfProperty ?dddDerivativeOfUri ;
+    mdq:primitiveProperty ?dddPrimitiveUri ;
+    mdq:derivativeProperty ?dddDerivativeUri ;
+    mdq:distributionsClass ?DddDistributionUri ;
+    vs:term_status "testing" ;
+    rdfs:isDefinedBy ?vocabularyUri . 
+
+  ?dddPrimitiveOfUri a owl:ObjectProperty , owl:FunctionalProperty , owl:InverseFunctionalProperty ;
+    rdfs:label ?dddPrimitiveOfLabel ;
+    rdfs:comment ?dddPrimitiveOfComment ;
+    rdfs:domain mdq:Dimension ;
+    rdfs:range mdq:Dimension ;
+    owl:inverseOf ?dddPrimitiveUri ;
+    vs:term_status "testing" ;
+    rdfs:isDefinedBy ?vocabularyUri . 
+
+  ?dddPrimitiveUri a owl:ObjectProperty , owl:FunctionalProperty , owl:InverseFunctionalProperty ;
+    rdfs:label ?dddPrimitiveLabel ;
+    rdfs:comment ?dddPrimitiveComment ;
+    rdfs:domain mdq:Dimension ;
+    rdfs:range mdq:Dimension ;
+    owl:inverseOf ?dddPrimitiveOfUri ;
+    vs:term_status "testing" ;
+    rdfs:isDefinedBy ?vocabularyUri . 
+
+  ?dddDerivativeOfUri a owl:ObjectProperty  , owl:FunctionalProperty , owl:InverseFunctionalProperty ;
+    rdfs:label ?dddDerivativeOfLabel ;
+    rdfs:comment ?dddDerivativeOfComment ;
+    rdfs:domain mdq:Dimension ;
+    rdfs:range mdq:Dimension ;
+    owl:inverseOf ?dddDerivativeUri ;
+    vs:term_status "testing" ;
+    rdfs:isDefinedBy ?vocabularyUri . 
+
+  ?dddDerivativeUri a owl:ObjectProperty  , owl:FunctionalProperty , owl:InverseFunctionalProperty ;
+    rdfs:label ?dddDerivativeLabel ;
+    rdfs:comment ?dddDerivativeComment ;
+    rdfs:domain mdq:Dimension ;
+    rdfs:range mdq:Dimension ;
+    owl:inverseOf ?dddDerivativeOfUri ;
+    vs:term_status "testing" ;
+    rdfs:isDefinedBy ?vocabularyUri . 
+
+  ?DddDistributionUri a owl:Class ;
+    rdfs:label ?DddDistributionLabel ;
+    rdfs:comment ?DddDistributionComment ;
+    rdfs:subClassOf mdq:Distribution , [ owl:onProperty mdq:dimension ; owl:hasValue ?DddDimensionUri ] ;
+    owl:equivalentClass [ owl:intersectionOf ( mdq:Distribution [ owl:onProperty mdq:dimension ; owl:hasValue ?DddDimensionUri ] ) ];
+    vs:term_status "testing" ;
+    rdfs:isDefinedBy ?vocabularyUri .
+
+} WHERE {
+
+  BIND( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.dimension" ) AS ?Ddd )
+  BIND( CONCAT( LCASE( SUBSTR( ?Ddd , 1 , 1) ) , SUBSTR( ?Ddd , 2) ) AS ?ddd )
+
+  BIND( CONCAT( ?Ddd , "Dimension" ) AS ?DddDimensionLabel )
+  BIND( URI( CONCAT( ?mdq , ?DddDimensionLabel ) ) AS ?DddDimensionUri )
+  BIND( STRLANG( REPLACE( "The Ddd dimension.", "Ddd", ?Ddd ) , "en" ) AS ?DddDimensionComment )
+
+  BIND( URI( CONCAT( ?mdq , <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.unit" ) ) ) AS ?unitLabel )
+  BIND( URI( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.unitUri" ) ) AS ?unitUri )
+  BIND( IF( BOUND( ?unitUri ) , ?unitUri , ?unitLabel ) AS ?unit ) 
+
+  BIND( URI( CONCAT( ?mdq , <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.deltaUnit" ) ) ) AS ?deltaUnitLabel )
+  BIND( URI( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.deltaUnitUri" ) ) AS ?deltaUnitUri )
+  BIND( IF( BOUND( ?deltaUnitUri ) , ?deltaUnitUri , ?deltaUnitLabel ) AS ?deltaUnit ) 
+
+  BIND( STRDT( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg , "$.additiveIdentityValue" ) , IF( BOUND( ?deltaUnit ) , ?deltaUnit , ?unit ) ) AS ?additiveIdentityValue ) 
+
+  BIND( CONCAT( ?ddd , "PrimitiveOf" ) AS ?dddPrimitiveOfLabel )
+  BIND( URI( CONCAT( ?mdq , ?dddPrimitiveOfLabel ) ) AS ?dddPrimitiveOfUri )
+  BIND( STRLANG( REPLACE( "Links a dimension to a dimension for which it is the Ddd primitive.", "Ddd", ?Ddd ) , "en" ) AS ?dddPrimitiveOfComment )
+
+  BIND( CONCAT( ?ddd , "Primitive" ) AS ?dddPrimitiveLabel )
+  BIND( URI( CONCAT( ?mdq , ?dddPrimitiveLabel ) ) AS ?dddPrimitiveUri )
+  BIND( STRLANG( REPLACE( "Links a dimension to its Ddd primitive dimension.", "Ddd", ?Ddd ) , "en" ) AS ?dddPrimitiveComment )
+
+  BIND( CONCAT( ?ddd , "DerivativeOf" ) AS ?dddDerivativeOfLabel )
+  BIND( URI( CONCAT( ?mdq , ?dddDerivativeOfLabel ) ) AS ?dddDerivativeOfUri )
+  BIND( STRLANG( REPLACE( "Links a dimension to a dimension for which it is the Ddd derivative.", "Ddd", ?Ddd ) , "en" ) AS ?dddDerivativeOfComment )
+
+  BIND( CONCAT( ?ddd , "Derivative" ) AS ?dddDerivativeLabel )
+  BIND( URI( CONCAT( ?mdq , ?dddDerivativeLabel ) ) AS ?dddDerivativeUri )
+  BIND( STRLANG( REPLACE( "Links a dimension to its Ddd derivative dimension.", "Ddd", ?Ddd ) , "en" ) AS ?dddDerivativeComment )
+
+  BIND( CONCAT( ?Ddd , "Distribution" ) AS ?DddDistributionLabel )
+  BIND( URI( CONCAT( ?mdq , ?DddDistributionLabel ) ) AS ?DddDistributionUri )
+  BIND( STRLANG( REPLACE( "The class of distributions on the Ddd dimension.", "Ddd", ?Ddd ) , "en" ) AS ?DddDistributionComment )
+
+}

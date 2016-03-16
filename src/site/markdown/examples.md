@@ -1,0 +1,266 @@
+# Examples
+
+This document will contain examples use of the Multidimensional Quantity ontology.
+
+```
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:  <http://www.w3.org/2002/07/owl#>.
+@prefix seas: <http://purl.org/NET/seas#>.
+@prefix mdq: <http://w3id.org/multidimensional-quantity/resource/> .
+
+## in the SEAS ontology
+# define the system seas:environment (or seas:Environment, your choice)
+seas:environment a mdq:System ;
+  rdfs:comment "the environment system, that is quantified with time, latitude, longitude, temperature, etc."@en .
+
+
+
+## in the FS ontology
+
+mdq:TimeDimension a mdq:Dimension ;
+  mdq:unit xsd:dateTime ;
+  mdq:deltaUnit xsd:duration .
+
+mdq:TimeFacet a mdq:Facet ;
+  mdq:FacetDimension mdq:TimeDimension ;
+  mdq:projectionProperty mdq:timeProjection ;
+  mdq:restrictionProperty mdq:timeRestriction ;
+  mdq:seriesProperty mdq:timeSeries .
+
+mdq:TimeDistribution rdfs:subClassOf mdq:Distribution .
+
+mdq:AngleDimension a mdq:Dimension ;
+  mdq:unit mdq:degree .
+
+mdq:AngleDistribution rdfs:subClassOf mdq:Distribution .
+
+mdq:LatitudeFacet a mdq:Facet ;
+  mdq:facetDimension mdq:AngleDimension ;
+  mdq:projectionProperty mdq:latitudeProjection ;
+  mdq:restrictionProperty mdq:latitudeRestriction ;
+  mdq:seriesProperty mdq:latitudeSeries .
+
+mdq:LongitudeFacet a mdq:Facet ;
+  mdq:facetDimension mdq:AngleDimension ;
+  mdq:projectionProperty mdq:longitudeProjection ;
+  mdq:restrictionProperty mdq:longitudeRestriction ;
+  mdq:seriesProperty mdq:longitudeSeries .
+
+mdq:TemperatureDimension a mdq:Dimension ;
+  mdq:unit mdq:degreeCelsius .
+
+mdq:AirTemperature a mdq:Facet ;
+  mdq:facetDimension mdq:TemperatureDimension ;
+  mdq:projectionProperty mdq:airTemperatureProjection ;
+  mdq:restrictionProperty mdq:airTemperatureRestriction ;
+  mdq:seriesProperty mdq:airTemperatureSeries .
+
+
+mdq:BooleanDimension a mdq:Dimension ;
+  mdq:unit xsd:boolean .
+
+mdq:SunRiseFacet a mdq:Facet ;
+  mdq:facetDimension mdq:BooleanDimension ;
+  mdq:projectionProperty mdq:sunRiseProjection ;
+  mdq:restrictionProperty mdq:sunRiseRestriction ;
+  mdq:seriesProperty mdq:sunRiseSeries .
+
+mdq:SunUpFacet a mdq:Facet ;
+  mdq:facetDimension mdq:BooleanDimension ;
+  mdq:projectionProperty mdq:sunUpProjection ;
+  mdq:restrictionProperty mdq:sunUpRestriction ;
+  mdq:seriesProperty mdq:sunUpSeries .
+
+
+## as the input/output of some algorithm
+# note that I use https there, meaning there is probably some security, access control, etc.  
+@base <https://example.org/resource/> .
+
+# this is a distribution of angle
+
+<dlat> a mdq:AngleDistribution ;
+ a mdq:Interval ;
+ mdq:minimum "45.372017"^^mdq:degree ;
+ mdq:maximum "45.477316"^^mdq:degree .
+
+# space1 is a slice of the environment.
+# it is the restriction of the environment with respect to latitude, longitude, and time.
+
+<space1> a mdq:Restriction ;
+  mdq:base seas:environment ;
+  mdq:latitudeRestriction <dlat> ;
+  mdq:longitudeRestriction [
+     a mdq:AngleDistribution , mdq:Interval ;
+   mdq:minimum "4.243841"^^mdq:degree ;
+   mdq:maximum "4.488974"^^mdq:degree  ] ;
+  mdq:timeRestriction [ mdq:value "2016-02-26T09:30:00Z"^^xsd:dateTime ] .
+
+
+# Then I quantify the "one and only exact" projection of F-space on facet airtemperature. I.e., any of the F-point in the F-space has a airtemperature facet in this distribution (or no airtemperature facet) 
+# I don't tell much except I am 100% sure that the airtemperature is not above 10.7 degreecelsius or under 3.2 degreecelsius
+
+<space1> mdq:airTemperatureLowerBound "3.2"^^mdq:degreeCelsius ;
+      mdq:airTemperatureUpperBound "10.7"^^mdq:degreeCelsius .
+
+
+
+# it is more sound and intuitive to describe physical systems through evaluations
+
+
+
+# my algorithm produces an "Evaluation" of a slice of seas:environment .
+
+<eval> a mdq:FacetedSpaceEvaluation ;
+  mdq:generatedBy <oneExecutionOfMyWeatherForecastService> ;
+  mdq:evaluates [ a mdq:Restriction ;
+    mdq:base seas:environment ;
+    mdq:latitudeRestriction [ mdq:value "45.372017"^^mdq:degree ] ;
+    mdq:longitudeRestriction [ mdq:value "4.488974"^^mdq:degree ] ;
+    mdq:timeRestriction [
+       a mdq:TimeDistribution , mdq:Interval ;
+     mdq:minimum "2016-02-26T00:00:00Z"^^xsd:dateTime ;
+     mdq:maximum "2016-02-27T00:00:00Z"^^xsd:dateTime  ] ] ;
+  mdq:timeSeries <ts> .
+
+
+<ts> mdq:firstStart "2016-02-26T00:00:00Z"^^xsd:dateTime ;
+     mdq:consecutiveStartOffset "PT6H"^^xsd:duration ;
+     a mdq:PointedSeries ;
+     mdq:series (
+      [ # the projection on time facet of this F-Space is a single value "2016-02-26T00:00:00Z"^^xsd:dateTime
+        mdq:airTemperatureProjection [ 
+          <http://w3id.org/fs/resource/decile/1> "3.2"^^<degreeCelsius> ;
+          <http://w3id.org/fs/resource/mean> "6.3"^^<degreeCelsius> ;
+          <http://w3id.org/fs/resource/decile/3> "9.8"^^<degreeCelsius> ]
+        ]
+      [ # the projection on time facet of this F-Space is a single value "2016-02-26T06:00:00Z"^^xsd:dateTime
+        mdq:airTemperatureProjection [ 
+          <http://w3id.org/fs/resource/decile/1> "3.2"^^<degreeCelsius> ;
+          <http://w3id.org/fs/resource/mean> "6.3"^^<degreeCelsius> ;
+          <http://w3id.org/fs/resource/decile/3> "9.8"^^<degreeCelsius> ]
+        ]
+      [ # the projection on time facet of this F-Space is a single value "2016-02-26T12:00:00Z"^^xsd:dateTime
+        mdq:airTemperatureProjection [ 
+          <http://w3id.org/fs/resource/decile/1> "3.2"^^<degreeCelsius> ;
+          <http://w3id.org/fs/resource/mean> "6.3"^^<degreeCelsius> ;
+          <http://w3id.org/fs/resource/decile/3> "9.8"^^<degreeCelsius> ]
+        ]
+    ...
+
+     ) .
+
+
+
+# my algorithm also uses facet  "SunRise" . This facet has the BooleanDimension dimension.
+
+
+# If I want to specify all the times when the sun is rising (i.e., exactly one instant per day)
+# I start by slicing the environment with the value of sunRise facet fixed to true.
+
+<eval2> a mdq:FacetedSpaceEvaluation ;
+  mdq:generatedBy <daylightForecastServiceExecution> ;
+  mdq:evaluates [ a mdq:Restriction ;
+    mdq:base seas:environment ;
+    mdq:sunRiseRestriction [ mdq:value "true"^^xsd:boolean ] ;
+    mdq:latitudeRestriction [ mdq:value "45.372017"^^mdq:degree ] ;
+    mdq:longitudeRestriction [ mdq:value "4.488974"^^mdq:degree ] ;
+    mdq:timeRestriction [
+       a mdq:TimeDistribution , mdq:Interval ;
+     mdq:minimum "2016-02-26T00:00:00Z"^^xsd:dateTime ;
+     mdq:maximum "2016-02-28T00:00:00Z"^^xsd:dateTime  ] ] . # slicing on two days
+
+# then I can tell that the projection of this F-space on facet time  contains the values 2016-02-26T07:29:00Z, and 2016-02-27T07:27:00Z,
+<eval2> <http://w3id.org/fs/resource/Time/contains> "2016-02-26T07:29:00Z"^^xsd:dateTime , "2016-02-27T07:27:00Z"^^xsd:dateTime .
+
+# but hey ! are they the only values ? due to RDF open world assumption, one cannot tell.
+# so the method is as follows.
+# --> slice on at most one day, 
+
+<eval3> a mdq:FacetedSpaceEvaluation ;
+  mdq:generatedBy <daylightForecastServiceExecution> ;
+  mdq:evaluates [ a mdq:Restriction ;
+    mdq:base seas:environment ;
+    mdq:sunRiseRestriction [ mdq:value "true"^^xsd:boolean ] ;
+    mdq:latitudeRestriction [ mdq:value "45.372017"^^mdq:degree ] ;
+    mdq:longitudeRestriction [ mdq:value "4.488974"^^mdq:degree ] ;
+    mdq:timeRestriction [
+       a mdq:TimeDistribution , mdq:Interval ;
+     mdq:minimum "2016-02-26T00:00:00Z"^^xsd:dateTime ;
+     mdq:maximum "2016-02-27T00:00:00Z"^^xsd:dateTime  ] ] . # slicing on just one day
+
+# then I can tell that the projection of this F-space on facet time is ONLY the value 2016-02-26T07:29:00Z
+
+<eval3> <http://w3id.org/fs/resource/Time/value> "2016-02-26T07:29:00Z"^^xsd:dateTime .
+
+
+# these slice with sunrise = true and time = 1 day can be organized in a series.
+
+<eval4> a mdq:FacetedSpaceEvaluation ;
+  mdq:generatedBy <daylightForecastServiceExecution> ;
+  mdq:evaluates [ a mdq:Restriction ;
+    mdq:base seas:environment ;
+    mdq:SunRiseRestriction [ mdq:value "true"^^xsd:boolean ] ;
+    mdq:latitudeRestriction [ mdq:value "45.372017"^^mdq:degree ] ;
+    mdq:longitudeRestriction [ mdq:value "4.488974"^^mdq:degree ] ;
+    mdq:timeSeries <ts4> .
+
+<ts4> mdq:firstStart "2016-02-26T00:00:00Z"^^xsd:dateTime ;
+     mdq:consecutiveStartOffset "P1D"^^xsd:duration ;
+     mdq:firstRange "P1D"^^xsd:duration ;
+     a mdq:SameRangeSeries , mdq:JoinedSeries ;
+     mdq:series (
+      [ <http://w3id.org/fs/resource/Time/value> "2016-02-26T07:29:00Z"^^xsd:dateTime ]
+      [ <http://w3id.org/fs/resource/Time/value> "2016-02-27T07:28:00Z"^^xsd:dateTime ]
+      [ <http://w3id.org/fs/resource/Time/value> "2016-02-27T07:27:00Z"^^xsd:dateTime ]
+      ...
+
+      ) .
+
+
+# similarly, one may have a facet "SunUp", that have the BooleanDimension dimension.
+
+# If I want to specify all the times when the sun is up (i.e., an interval per day)
+# I slice the environment with the value of SunUp facet fixed to true, then I define day series. 
+
+<eval5> a mdq:FacetedSpaceEvaluation ;
+  mdq:generatedBy <daylightForecastServiceExecution> ;
+  mdq:evaluates [ a mdq:Restriction ;
+    mdq:base seas:environment ;
+    mdq:SunUpRestriction [ mdq:value "true"^^xsd:boolean ] ;
+    mdq:latitudeRestriction [ mdq:value "45.372017"^^mdq:degree ] ;
+    mdq:longitudeRestriction [ mdq:value "4.488974"^^mdq:degree ] ;
+    mdq:timeSeries <ts5> .
+
+<ts5> mdq:firstStart "2016-02-26T00:00:00Z"^^xsd:dateTime ;
+     mdq:consecutiveStartOffset "P1D"^^xsd:duration ;
+     mdq:firstRange "P1D"^^xsd:duration ;
+     a mdq:SameRangeSeries , mdq:JoinedSeries ;
+     mdq:series (
+      [ 
+        mdq:timeProjection [
+          a mdq:Interval ;
+          mdq:minimum "2016-02-26T07:29:00Z"^^xsd:dateTime ; 
+          mdq:maximum "2016-02-26T18:12:00Z"^^xsd:dateTime 
+        ]
+      ]
+      [ 
+        mdq:timeProjection [
+          a mdq:Interval ;
+          mdq:minimum "2016-02-26T07:28:00Z"^^xsd:dateTime ; 
+          mdq:maximum "2016-02-26T18:14:00Z"^^xsd:dateTime 
+        ]
+      ]
+
+      ...
+
+      ) .
+```
+
+
+# Contribute to the MDQ site
+
+We are currently developing examples for the ontology. Do not hesitate to propose examples, additions, report bugs, or just say hello:
+
+- The issue tracker - http://github.com/thesmartenergy/mdq-ontology-site/issues

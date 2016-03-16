@@ -1,0 +1,70 @@
+# Copyright 2016 ITEA 12004 SEAS Project.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, 
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdf: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX fn: <http://www.w3.org/2005/xpath-functions#> 
+PREFIX vann: <http://purl.org/vocab/vann/> 
+PREFIX voaf: <http://purl.org/vocommons/voaf#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/terms/> 
+PREFIX vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> 
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX lindt: <http://purl.org/NET/lindt#>
+
+PREFIX mdq: <http://w3id.org/multidimensional-quantity/resource/>
+
+BASE <http://w3id.org/multidimensional-quantity/resource/>
+
+GENERATE {
+
+  ?vocabularyUri a voaf:Vocabulary ;
+    dc:title ?title ;
+    dc:description ?description ;
+    dc:issued ?date .
+
+  # Ddd
+  GENERATE <http://w3id.org/multidimensional-quantity/query/Dimension> 
+  ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.dimensions[*]" ) AS ?msg .
+
+  # Uuu
+  GENERATE <http://w3id.org/multidimensional-quantity/query/Unit> 
+  ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.units[*]" ) AS ?msg .
+
+  # Xxx
+  GENERATE <http://w3id.org/multidimensional-quantity/query/Facet>
+  ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.facets[*]" ) AS ?msg .
+
+  # Sss
+  GENERATE <http://w3id.org/multidimensional-quantity/query/System>
+  ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.systems[*]" ) AS ?msg .
+
+  # Ccc
+  GENERATE <http://w3id.org/multidimensional-quantity/query/Connection>
+  ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.connections[*]" ) AS ?msg .
+
+  # Ppp
+  GENERATE <http://w3id.org/multidimensional-quantity/query/ConnectionPoint>
+  ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.connectionpoints[*]" ) AS ?msg .
+
+} WHERE {
+  BIND( "http://w3id.org/multidimensional-quantity/resource/" AS ?mdq )
+  BIND( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg, "$.vocabulary.name" ) AS ?name )
+  BIND( URI( CONCAT( ?mdq , ENCODE_FOR_URI( ?name ) , "Vocabulary" ) ) AS ?vocabularyUri )
+  BIND( STRLANG( CONCAT( "The " , ?name , " Vocabulary" ) , "en" ) AS ?title )
+  BIND( STRLANG( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg, "$.vocabulary.description" ) , "en" ) AS ?description )
+  BIND( now() as ?date ) 
+}
