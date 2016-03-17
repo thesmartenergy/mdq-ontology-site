@@ -8,7 +8,6 @@
     <packaging>war</packaging>
 
     <name>Multidimensional Quantity Ontology - website</name>
-
     <description>The source of the web API that exposes the domain-configurable Multi Dimensional Quantity Ontology, http://w3id.org/multidimensional-quantity/</description>
     <url>http://w3id.org/multidimensional-quantity/</url>
     <inceptionYear>2016</inceptionYear>
@@ -143,7 +142,6 @@
 
 
     <build>
-        
         <pluginManagement>
             <plugins>
                 <!-- ========================  -->
