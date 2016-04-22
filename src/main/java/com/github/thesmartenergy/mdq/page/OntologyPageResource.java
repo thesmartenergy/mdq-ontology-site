@@ -16,6 +16,9 @@
 package com.github.thesmartenergy.mdq.page;
 
 import com.github.thesmartenergy.mdq.entities.Ontology;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -46,8 +49,12 @@ public class OntologyPageResource {
     public Response getAsHtml(@PathParam("id") String id) {
         String requestedUri = ontology.getBase() + "resource/" + id;
         if(ontology.getDocuments().containsKey(requestedUri)) {
-            String res = "No HTML documentation for resource &lt;" + requestedUri + "&gt; for now. Use HTTP Request Header Field Accept: text/turtle , or application/rdf+xml instead.";
-            return Response.ok(res, "text/html").build();
+            try {
+                return Response.seeOther(new URI("http://vowl.visualdataweb.org/webvowl/#iri=" + requestedUri)).build();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(OntologyPageResource.class.getName()).log(Level.SEVERE, null, ex);
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            }
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }

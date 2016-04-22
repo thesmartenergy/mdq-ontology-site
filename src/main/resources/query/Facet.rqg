@@ -55,6 +55,7 @@ GENERATE {
       mdq:projectionMaximumIncludedProperty ?xxxProjectionMaximumIncludedUri ;
       mdq:projectionMaximumExcludedProperty ?xxxProjectionMaximumExcludedUri ;
       mdq:seriesProperty ?xxxSeriesUri ;
+      mdq:restrictionProperty ?xxxRestrictionUri ;
       vs:term_status "testing" ;
       rdfs:isDefinedBy ?vocabularyUri . 
 
@@ -190,6 +191,23 @@ GENERATE {
       rdfs:isDefinedBy ?vocabularyUri . 
 
 
+    ?xxxRestrictionUri a owl:ObjectProperty ;
+      rdfs:label ?xxxRestrictionLabel ;
+      rdfs:comment ?xxxRestrictionComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      rdfs:range ?DddDistributionUri ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+    ?nominalXxxUri a owl:ObjectProperty ;
+      rdfs:label ?nominalXxxLabel ;
+      rdfs:comment ?nominalXxxComment ;
+      rdfs:domain mdq:FacetedSpace ;
+      rdfs:range ?DddDistributionUri ;
+      vs:term_status "testing" ;
+      rdfs:isDefinedBy ?vocabularyUri . 
+
+
 
 } WHERE {
 
@@ -273,8 +291,16 @@ GENERATE {
   BIND( URI( CONCAT( ?mdq , ?xxxProjectionMaximumExcludedLabel ) ) AS ?xxxProjectionMaximumExcludedUri )
   BIND( STRLANG( REPLACE( "Links any F-space to the excluded maximum of its projection on facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxProjectionMaximumExcludedComment )
 
-  BIND( CONCAT( ?Ddd , "Series" ) AS ?xxxSeriesLabel )
+  BIND( CONCAT( ?Xxx , "Series" ) AS ?xxxSeriesLabel )
   BIND( URI( CONCAT( ?mdq , ?xxxSeriesLabel ) ) AS ?xxxSeriesUri )
   BIND( STRLANG( REPLACE( "Links any F-space to a F-space series along facet Xxx.", "Xxx", ?Xxx ) , "en" ) AS ?xxxSeriesComment )
+
+  BIND( CONCAT( ?Xxx , "Restriction" ) AS ?xxxRestrictionLabel )
+  BIND( URI( CONCAT( ?mdq , ?xxxRestrictionLabel ) ) AS ?xxxRestrictionUri )
+  BIND( STRLANG( REPLACE( REPLACE( "Links any F-space to the Ddd distribution it is restricted on the Xxx facet, with respect to its base F-space.", "Ddd", ?Ddd ), "Xxx", ?Xxx ) , "en" ) AS ?xxxRestrictionComment )
+
+  BIND( CONCAT( "nominal", ?Xxx ) AS ?nominalXxxLabel )
+  BIND( URI( CONCAT( ?mdq , ?nominalXxxLabel ) ) AS ?nominalXxxUri )
+  BIND( STRLANG( REPLACE( "Links any F-space to its nominal projected distribution on the Xxx facet.", "Xxx", ?Xxx ) , "en" ) AS ?nominalXxxComment )
 
 }

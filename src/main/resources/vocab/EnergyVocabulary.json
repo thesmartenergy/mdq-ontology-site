@@ -1,9 +1,7 @@
 {
-    "licence" : "Copyright 2016 ITEA 12004 SEAS Project.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing,\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
     "vocabulary" : {
         "name" : "Energy" ,
-        "description" : "A custom vocabulary that defines Energy Systems.",
-        "licence" : ""
+        "description" : "A custom vocabulary that defines Energy Systems." 
     },
     "dimensions"  : [
         { "dimension": "Dimensionless", "unitUri" : "http://www.w3.org/2001/XMLSchema#decimal", "additiveIdentityValue": "0.0" },
@@ -21,9 +19,13 @@
         { "dimension": "Temperature", "unit" : "degreeCelcius" },
         { "dimension": "SolarRadiationEnergy", "unit" : "joulePerSquaremetre", "additiveIdentityValue": "0.0" },
         { "dimension": "SolarRadiationPower", "unit" : "wattPerSquaremetre", "additiveIdentityValue": "0.0" },
+        { "dimension": "Volume", "unit": "litre", "additiveIdentityValue": "0.0" },
+        { "dimension": "Pressure", "unit": "pascal", "additiveIdentityValue": "0.0" },
+        { "dimension": "Speed", "unit": "kilometerhour", "additiveIdentityValue": "0.0" },
         { "dimension": "Time", "unitUri": "http://www.w3.org/2001/XMLSchema#dateTime", "deltaUnitUri": "http://www.w3.org/2001/XMLSchema#duration", "additiveIdentityValue": "PT0S" }
     ],
     "units" : [
+        { "unit" : "percent" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "ohm" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "joule" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "metre" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
@@ -38,30 +40,30 @@
         { "unit" : "watthour" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "kilowatthour" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "degreeCelcius"  , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
+        { "unit" : "degreeFahrenheit" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "volt"  , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "ampere" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "joulePerSquaremetre" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
         { "unit" : "wattPerSquaremetre" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
-        { "unit" : "percent" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" }
+        { "unit" : "litre" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" },
+        { "unit" : "pascal" , "baseUri" : "http://www.w3.org/2001/XMLSchema#decimal" }
     ],
     "facets" : [
         { "facet" : "Time" , "dimension" : "Time" },
         { "facet" : "Latitude" , "dimension" : "Angle" },
         { "facet" : "Longitude" , "dimension" : "Angle" },
         { "facet" : "Altitude" , "dimension" : "Length" },
-        { "facet": "PowerBalance" , "dimension" : "Power" },
-        { "facet" : "IncomingPower" , "dimension" : "Power" },
-        { "facet" : "OutgoingPower" , "dimension" : "Power" },
+        { "facet" : "PowerBalance" , "dimension" : "Power" },
         { "facet" : "ConsumptionPower" , "dimension" : "Power" },
-        { "facet" : "IncomingPower" , "dimension" : "Power" },
         { "facet" : "ProductionPower" , "dimension" : "Power" },
+        { "facet" : "IncomingPower" , "dimension" : "Power" },
         { "facet" : "OutgoingPower" , "dimension" : "Power" },
         { "facet" : "StoragePower" , "dimension" : "Power" },
         { "facet" : "RatedPowerCharge" , "dimension" : "Power" },
         { "facet" : "RatedPowerDischarge" , "dimension" : "Power" },
         { "facet" : "ExternalPowerBalance" , "dimension" : "Power" },
         { "facet" : "InternalPowerBalance" , "dimension" : "Power" },
-        { "facet": "TransferingPower" , "dimension" : "Power" },
+        { "facet": "TransferringPower" , "dimension" : "Power" },
         { "facet": "RatedPower" , "dimension" : "Power" },
         { "facet": "EnergyBalance" , "dimension" : "Energy" },
         { "facet" : "IncomingEnergy" , "dimension" : "Energy" },
@@ -75,7 +77,7 @@
         { "facet" : "RatedEnergy" , "dimension" : "Energy" },
         { "facet" : "ExternalEnergyBalance" , "dimension" : "Energy" },
         { "facet" : "InternalEnergyBalance" , "dimension" : "Energy" },
-        { "facet": "TransferedEnergy" , "dimension" : "Energy" },
+        { "facet" : "TransferredEnergy" , "dimension" : "Energy" },
         { "facet" : "ElectricResistance" , "dimension" : "ElectricResistance" },
         { "facet" : "ElectricReactance" , "dimension" : "ElectricResistance" },
         { "facet" : "StateOfHealth" , "dimension" : "Ratio" },
@@ -104,7 +106,7 @@
         { "facet": "IncomingMoneyPerTime" , "dimension" : "MoneyPerTime" },
         { "facet": "OutgoingMoneyPerTime" , "dimension" : "MoneyPerTime" },
         { "facet": "MoneyBalancePerTime" , "dimension" : "MoneyPerTime" },
-        { "facet": "Offer" , "dimension" : "EnergyPrice" },
+        { "facet": "EnergyOffer" , "dimension" : "EnergyPrice" },
         { "facet": "IncomingMoney" , "dimension" : "Money" },
         { "facet": "OutgoingMoney" , "dimension" : "Money" },
         { "facet": "MoneyBalance" , "dimension" : "Money" },
@@ -118,98 +120,141 @@
         { "facet": "ConsumptionPrice" , "dimension" : "Money" },
         { "facet": "ProductionPrice" , "dimension" : "Money" },
         { "facet": "StoragePrice" , "dimension" : "Money" },
-        { "facet": "TransferingPowerFrom1To2" , "dimension" : "Power" },
-        { "facet": "TransferedEnergyFrom1To2" , "dimension" : "Energy" },
-        { "facet": "TransferingPowerFrom2To1" , "dimension" : "Power" },
-        { "facet": "TransferedEnergyFrom2To1" , "dimension" : "Energy" }
+        { "facet": "TransferringPower" , "dimension" : "Power" },
+        { "facet": "TransferredEnergy" , "dimension" : "Energy" },
+        { "facet": "ConsumedWater" , "dimension" : "Volume" },
+        { "facet": "StoredWater" , "dimension" : "Volume" },
+        { "facet": "WaterLevel" , "dimension" : "Length" },
+        { "facet": "MaximumWaterLevel" , "dimension" : "Length" },
+        { "facet": "MinimumWaterLevel" , "dimension" : "Length" },
+        { "facet": "ElectricityProductionThreshold" , "dimension" : "Length" },
+        { "facet": "PumpActivationThreshold" , "dimension" : "Length" },
+        { "facet": "WindSpeed" , "dimension" : "Speed" },
+        { "facet": "AirPressure" , "dimension" : "Pressure" },
+        { "facet": "AirTemperature" , "dimension" : "Temperature" },
+        { "facet": "AirHumidity" , "dimension" : "Humidity" }
     ],
     "systems" : [
         { 
-            "system": "House",
-            "comment": "The class of Houses. This concept has been introduced during SEAS QM 01/2016. Quantities and Domains have to be double checked."
+            "system": "GeoLocalized",
+            "comment": "The class of GeoLocalized Systems."
         },
         { 
-            "system": "GeoLocalized",
-            "comment": "The class of GeoLocalized Systems. They are quantified (at least) with Latitude, Longitude, and Altitude. They have (at least) a Time validity facet."
+            "system": "Energy",
+            "comment": "The class of Energy Systems."
         },
         { 
             "system": "EnergyBranch",
-            "comment": "The class of EnergyBranch Systems. They have various facet which all have some validity facet."
+            "comment": "The class of EnergyBranch Systems.",
+            "subclassof" : [ "Energy" ]
         },
         { 
             "system": "EnergyConsumer",
-            "comment": "The class of EnergyConsumer Systems. They have various facet which all have some validity facet."
+            "comment": "The class of EnergyConsumer Systems.",
+            "subclassof" : [ "Energy" ]
         },
         { 
             "system": "EnergyProducer",
-            "comment": "The class of EnergyProducer Systems. They have various facet which all have some validity facet."
+            "comment": "The class of EnergyProducer Systems.",
+            "subclassof" : [ "Energy" ]
         },
         { 
             "system": "EnergyStore",
-            "comment": "The class of EnergyStore Systems. They have various facet which all have some validity facet."
-        },
-        { 
-            "system": "WindTurbine",
-            "comment": "The class of WindTurbine Systems. What are their facet ?"
+            "comment": "The class of EnergyStore Systems.",
+            "subclassof" : [ "Energy" ]
         },
         { 
             "system": "EnergyProsumer",
-            "comment": "The class of EnergyProsumer Systems. What are their facet ?",
+            "comment": "The class of EnergyProsumer Systems.",
             "subclassof" : [ "EnergyConsumer", "EnergyProducer", "EnergyStore" ]
         },
         { 
+            "system": "WindTurbine",
+            "comment": "The class of WindTurbine Systems.",
+            "subclassof" : [ "EnergyProducer" ]
+        },
+        { 
             "system": "MoneyExchanger",
-            "comment": "The class of MoneyExchanger Systems. What are their facet ?"
+            "comment": "The class of MoneyExchanger Systems."
         },
         { 
-            "system": "ElectricVehicle",
-            "comment": "The class of Energy Prosumers.",
-            "subclassof" : [ "EnergyProsumer" ]
+            "system": "Water",
+            "comment": "The class of Water Systems."
         },
         { 
-            "system": "ElectricVehicleServiceEquipment",
-            "comment": "The class of Electric Vehicle Service Equipment.",
-            "subclassof" : [ "EnergyProsumer" ]
+            "system": "WaterConsumer",
+            "comment": "The class of WaterConsumer Systems.",
+            "subclassof" : [ "Water" ]
+        },
+        { 
+            "system": "WaterSupplier",
+            "comment": "The class of WaterSupplier Systems.",
+            "subclassof" : [ "Water" ]
+        },
+        { 
+            "system": "WaterStore",
+            "comment": "The class of WaterStore Systems.",
+            "subclassof" : [ "Water" ]
+        },
+        { 
+            "system": "WaterTower",
+            "comment": "The class of WaterTower Systems."
         }
     ],
     "connections" : [
         {
             "connection": "Energy",
-            "comment" : "The class of Energy connections between systems.",
-            "connectedsystems" : [ "EnergyProsumer" ]
+            "comment" : "The class of Energy connections between energy systems, via which energy can be exchanged.",
+            "connectedsystems" : [ "Energy" ]
         },
         {
             "connection": "Monetary",
-            "comment": "The class of Monetary connection points of a Monetary systems, via which it may be connected to other systems and exchange Money.",
+            "comment": "The class of Monetary connections between Monetary systems, via which money can be exchanged.",
             "connectedsystems" : [ "MoneyExchanger" ]
+        },
+        {
+            "connection": "Water",
+            "comment": "The class of Water connection between systems, via which water can be exchanged.",
+            "connectedsystems" : [ "Water" ]
         }    
     ], 
     "connectionpoints" : [
         {
             "connectionpoint": "EnergyConsumer",
-            "comment": "The class of connection points of a EnergyConsumer system, via which it may be connected to other systems and consume Energy.",
-            "connectedsystems" : [ "EnergyConsumer" ]
+            "comment": "The class of connection points of a EnergyConsumer system, through which it receives energy from other energy systems.",
+            "connectionPointOf" : [ "EnergyConsumer" ]
         },
         {
             "connectionpoint": "EnergyProducer",
-            "comment": "The class of connection points of a EnergyProducer system, via which it may be connected to other systems and produce Energy.",
-            "connectedsystems" : [ "EnergyProducer" ]
+            "comment": "The class of connection points of a EnergyProducer system, through which it gives energy to other energy systems.",
+            "connectionPointOf" : [ "EnergyProducer" ]
         },
         {
             "connectionpoint": "EnergyProsumer",
-            "comment": "The class of connection points of a EnergyProsumer system, via which it may be connected to other systems and exchange Energy.",
+            "comment": "The class of connection points of a EnergyProsumer system, through which it exchanges energy with other energy systems.",
             "subclassof" : [ "EnergyConsumer" , "EnergyProducer" ],
-            "connectedsystems" : [ "EnergyProsumer" ]
+            "connectionPointOf" : [ "EnergyProsumer" ]
         },
         {
             "connectionpoint": "Monetary",
-            "comment": "The class of connection points of a Monetary system, via which it may be connected to other systems and exchange Money.",
-            "connectedsystems" : [ "MoneyExchanger" ]
+            "comment": "The class of connection points of a Monetary system, through which it exchanges money with other MoneyExchanger systems.",
+            "connectionPointOf" : [ "MoneyExchanger" ]
         },
         {
             "connectionpoint": "MonetizedEnergy",
-            "comment": "The class of connection points of a system that stores and exchanges energy and money, that defines the price of energy, in function of time and a facet of energy.",
-            "connectedsystems" : [ "EnergyProsumer" , "MoneyExchanger" ]
+            "comment": "The class of connection points of a system that stores and exchanges energy and money.",
+            "subclassof" : [ "EnergyProsumer" , "Monetary" ],
+            "connectionPointOf" : [ "EnergyProsumer" , "MoneyExchanger" ]
+        },
+        {
+            "connectionpoint": "WaterConsumer",
+            "comment": "The class of connection points of a WaterConsumer system, through which it receives water from other water systems.",
+            "connectionPointOf" : [ "WaterConsumer" ]
+        },
+        {
+            "connectionpoint": "WaterSupplier",
+            "comment": "The class of connection points of a WaterSupplier system, through which it gives water to other water systems.",
+            "connectionPointOf" : [ "WaterSupplier" ]
         }
     ]
 }

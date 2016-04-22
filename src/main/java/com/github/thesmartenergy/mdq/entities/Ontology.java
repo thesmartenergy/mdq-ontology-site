@@ -126,10 +126,10 @@ public class Ontology implements Document {
                 // execute the plan
                 plan.exec(initialBinding, vocabModel);
                 
-                File f = new File("C:/temp/mdq/out.ttl");
-                OutputStream out = new FileOutputStream(f);
-                vocabModel.write(out, "TTL"); 
-                out.close();
+//                File f = new File("C:/temp/mdq/out.ttl");
+//                OutputStream out = new FileOutputStream(f);
+//                vocabModel.write(out, "TTL"); 
+//                out.close();
                 
                 
                 // get the uri of the vocabulary                

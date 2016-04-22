@@ -538,36 +538,20 @@ mdq:unionOfSpaces a owl:ObjectProperty ;
 #######################################
 # Spaces Restriction
 
-mdq:SpaceRestriction a owl:Class ; 
-  rdfs:label "SpaceRestriction" ;
-  rdfs:comment "The class of space restriction."@en ;
+mdq:Restriction a owl:Class ; 
+  rdfs:subClassOf mdq:FacetedSpace ;
+  rdfs:label "Restriction" ;
+  rdfs:comment "The class of restrictions of faceted spaces."@en ;
   vs:term_status "testing" ;
   rdfs:isDefinedBy mdq:Ontology . 
 
-mdq:onSpace a owl:ObjectProperty ; 
-  rdfs:label "onSpace" ;
+mdq:base a owl:ObjectProperty ; 
+  rdfs:label "base" ;
   rdfs:comment "The restricted F-space."@en ;
-  rdfs:domain mdq:SpaceRestriction ;
+  rdfs:domain mdq:Restriction ;
   rdfs:range mdq:FacetedSpace ;
   vs:term_status "testing" ;
   rdfs:isDefinedBy mdq:Ontology . 
-
-mdq:onFacet a owl:ObjectProperty ; 
-  rdfs:label "onFacet" ;
-  rdfs:comment "The restricted facet."@en ;
-  rdfs:domain mdq:SpaceRestriction ;
-  rdfs:range mdq:Facet ;
-  vs:term_status "testing" ;
-  rdfs:isDefinedBy mdq:Ontology . 
-
-mdq:allValuesIn a owl:ObjectProperty ; 
-  rdfs:label "allValuesIn" ;
-  rdfs:comment "A super distribution of the projection of the restricted space."@en ;
-  rdfs:domain mdq:SpaceRestriction ;
-  rdfs:range mdq:Distribution ;
-  vs:term_status "testing" ;
-  rdfs:isDefinedBy mdq:Ontology . 
-
 
 #######################################
 #######################################
