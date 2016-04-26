@@ -36,7 +36,7 @@ import org.apache.commons.io.IOUtils;
 public class QueryResource {
 
     static final Logger LOG = Logger.getLogger(QueryResource.class.getSimpleName());
-    static final String BASE = "http://w3id.org/multidimensional-quantity/query/";
+    static final String BASE = "https://w3id.org/multidimensional-quantity/query/";
     
     @Inject
     Ontology ontology;

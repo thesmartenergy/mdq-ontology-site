@@ -15,13 +15,13 @@
 @prefix lm: <http://jena.hpl.hp.com/2004/08/location-mapping#> .
 
 [] lm:mapping
-   [ lm:name "http://w3id.org/multidimensional-quantity/resource/Ontology" ; lm:altName "ontology/Ontology.ttl" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/resource/EnergyVocabulary" ; lm:altName "vocab/EnergyVocabulary.json" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/query/Connection" ; lm:altName "query/Connection.rqg" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/query/ConnectionPoint" ; lm:altName "query/ConnectionPoint.rqg" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/query/Dimension" ; lm:altName "query/Dimension.rqg" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/query/Facet" ; lm:altName "query/Facet.rqg" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/query/System" ; lm:altName "query/System.rqg" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/query/Unit" ; lm:altName "query/Unit.rqg" ] ,
-   [ lm:name "http://w3id.org/multidimensional-quantity/query/Vocabulary" ; lm:altName "query/Vocabulary.rqg" ]
+   [ lm:name "https://w3id.org/multidimensional-quantity/resource/Ontology" ; lm:altName "ontology/Ontology.ttl" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/resource/EnergyVocabulary" ; lm:altName "vocab/EnergyVocabulary.json" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/query/Connection" ; lm:altName "query/Connection.rqg" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/query/ConnectionPoint" ; lm:altName "query/ConnectionPoint.rqg" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/query/Dimension" ; lm:altName "query/Dimension.rqg" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/query/Facet" ; lm:altName "query/Facet.rqg" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/query/System" ; lm:altName "query/System.rqg" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/query/Unit" ; lm:altName "query/Unit.rqg" ] ,
+   [ lm:name "https://w3id.org/multidimensional-quantity/query/Vocabulary" ; lm:altName "query/Vocabulary.rqg" ]
    .

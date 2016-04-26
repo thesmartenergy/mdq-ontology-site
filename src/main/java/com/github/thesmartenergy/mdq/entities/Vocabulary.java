@@ -19,6 +19,7 @@ import java.io.StringWriter;
 import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.writer.TurtleWriter;
 
 /**
@@ -43,6 +44,14 @@ public class Vocabulary implements Document {
         sw.append(ontology.asTurtle());
         model.write(sw, "TTL");
         return sw.toString();        
+    }
+    
+    @Override
+    public String asXML() {
+        Model model = ModelFactory.createDefaultModel().read(IOUtils.toInputStream(asTurtle()), "http://ex.org/", "TTL");
+        StringWriter sw = new StringWriter();
+        model.write(sw);
+        return sw.toString();
     }
 
 }

@@ -23,4 +23,6 @@ public interface Document {
     
     String asTurtle();
 
+    String asXML();
+
 }

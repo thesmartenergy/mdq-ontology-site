@@ -19,10 +19,7 @@ import com.github.thesmartenergy.sparql.generate.jena.engine.PlanFactory;
 import com.github.thesmartenergy.sparql.generate.jena.engine.RootPlan;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.net.URI;
-import java.net.URL;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -57,7 +54,7 @@ public class Ontology implements Document {
 
     private static final Logger LOG = Logger.getLogger(Ontology.class.getSimpleName());
 
-    private final String base = "http://w3id.org/multidimensional-quantity/";
+    private final String base = "https://w3id.org/multidimensional-quantity/";
     private final String uri = base + "resource/Ontology";
     
     private final Map<String, Document> documents = new HashMap<>();
@@ -176,6 +173,14 @@ public class Ontology implements Document {
     @Override
     public String asTurtle() {
         return turtle;
+    }
+
+    @Override
+    public String asXML() {
+        Model model = ModelFactory.createDefaultModel().read(IOUtils.toInputStream(turtle), "http://ex.org/", "TTL");
+        StringWriter sw = new StringWriter();
+        model.write(sw);
+        return sw.toString();
     }
 
 }

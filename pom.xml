@@ -142,6 +142,7 @@
 
 
     <build>
+        <finalName>multidimensional-quantity</finalName>
         <pluginManagement>
             <plugins>
                 <!-- ========================  -->
@@ -211,6 +212,7 @@
                         -->
                         <exclude>nbactions.xml</exclude>
                         <exclude>**/*.html</exclude>
+                        <exclude>**/*.json</exclude>
                         <exclude>**/*.md</exclude>
                         <exclude>**/*.xml</exclude>
                         <exclude>**/*.properties</exclude>

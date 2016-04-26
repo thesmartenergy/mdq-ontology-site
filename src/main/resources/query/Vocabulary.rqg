@@ -25,9 +25,9 @@ PREFIX vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX lindt: <http://purl.org/NET/lindt#>
 
-PREFIX mdq: <http://w3id.org/multidimensional-quantity/resource/>
+PREFIX mdq: <https://w3id.org/multidimensional-quantity/resource/>
 
-BASE <http://w3id.org/multidimensional-quantity/resource/>
+BASE <https://w3id.org/multidimensional-quantity/resource/>
 
 GENERATE {
 
@@ -37,31 +37,31 @@ GENERATE {
     dc:issued ?date .
 
   # Ddd
-  GENERATE <http://w3id.org/multidimensional-quantity/query/Dimension> 
+  GENERATE <https://w3id.org/multidimensional-quantity/query/Dimension> 
   ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.dimensions[*]" ) AS ?msg .
 
   # Uuu
-  GENERATE <http://w3id.org/multidimensional-quantity/query/Unit> 
+  GENERATE <https://w3id.org/multidimensional-quantity/query/Unit> 
   ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.units[*]" ) AS ?msg .
 
   # Xxx
-  GENERATE <http://w3id.org/multidimensional-quantity/query/Facet>
+  GENERATE <https://w3id.org/multidimensional-quantity/query/Facet>
   ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.facets[*]" ) AS ?msg .
 
   # Sss
-  GENERATE <http://w3id.org/multidimensional-quantity/query/System>
+  GENERATE <https://w3id.org/multidimensional-quantity/query/System>
   ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.systems[*]" ) AS ?msg .
 
   # Ccc
-  GENERATE <http://w3id.org/multidimensional-quantity/query/Connection>
+  GENERATE <https://w3id.org/multidimensional-quantity/query/Connection>
   ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.connections[*]" ) AS ?msg .
 
   # Ppp
-  GENERATE <http://w3id.org/multidimensional-quantity/query/ConnectionPoint>
+  GENERATE <https://w3id.org/multidimensional-quantity/query/ConnectionPoint>
   ITERATOR <http://w3id.org/sparql-generate/ite/JSONPath>( ?msg, "$.connectionpoints[*]" ) AS ?msg .
 
 } WHERE {
-  BIND( "http://w3id.org/multidimensional-quantity/resource/" AS ?mdq )
+  BIND( "https://w3id.org/multidimensional-quantity/resource/" AS ?mdq )
   BIND( <http://w3id.org/sparql-generate/fn/JSONPath>( ?msg, "$.vocabulary.name" ) AS ?name )
   BIND( URI( CONCAT( ?mdq , ENCODE_FOR_URI( ?name ) , "Vocabulary" ) ) AS ?vocabularyUri )
   BIND( STRLANG( CONCAT( "The " , ?name , " Vocabulary" ) , "en" ) AS ?title )

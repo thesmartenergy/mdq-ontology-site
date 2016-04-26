@@ -25,9 +25,9 @@ PREFIX vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX lindt: <http://purl.org/NET/lindt#>
 
-PREFIX mdq: <http://w3id.org/multidimensional-quantity/resource/>
+PREFIX mdq: <https://w3id.org/multidimensional-quantity/resource/>
 
-BASE <http://w3id.org/multidimensional-quantity/resource/>
+BASE <https://w3id.org/multidimensional-quantity/resource/>
 
 GENERATE {
 

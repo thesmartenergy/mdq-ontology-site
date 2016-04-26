@@ -25,8 +25,8 @@
 
 @prefix lindt: <https://w3id.org/lindt#>.
 
-@prefix mdq: <http://w3id.org/multidimensional-quantity/resource/>.
-@base <http://w3id.org/multidimensional-quantity/resource/> .
+@prefix mdq: <https://w3id.org/multidimensional-quantity/resource/>.
+@base <https://w3id.org/multidimensional-quantity/resource/> .
 
 # ontology 
 
@@ -37,7 +37,7 @@ mdq:Ontology a owl:Ontology , voaf:Vocabulary ;
   dc:issued "2015-09-10"^^xsd:date ;
   dc:modified "2016-03-12"^^xsd:date ;
   vann:preferredNamespacePrefix "mdq" ;
-  vann:preferredNamespaceUri <http://w3id.org/multidimensional-quantity/resource/> ;
+  vann:preferredNamespaceUri <https://w3id.org/multidimensional-quantity/resource/> ;
   owl:versionInfo "v1.0" .
 
 #######################################

@@ -16,6 +16,8 @@
 package com.github.thesmartenergy.mdq.page;
 
 import com.github.thesmartenergy.mdq.entities.Ontology;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
@@ -68,21 +70,23 @@ public class OntologyPageResource {
         if(!ontology.getDocuments().containsKey(requestedUri)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(ontology.getDocuments().get(requestedUri).asTurtle(), "text/turtle").build();
+        Response.ResponseBuilder res = Response.ok(ontology.getDocuments().get(requestedUri).asTurtle(), "text/turtle");
+        res.header("Content-Disposition", "filename= mdq.ttl;");
+        return res.build();
     }
         
-//    @GET
-//    @Produces("application/rdf+xml")
-//    @Path("{id}")
-//    public Response getAsXML(@PathParam("id") String id) {
-//        if(TurtleDocument.baseResources.contains(id)) {
-//            ByteArrayOutputStream out = new ByteArrayOutputStream();
-//            TurtleDocument.baseModel.write(out);
-//            InputStream in = new ByteArrayInputStream(out.toByteArray());
-//            return Response.ok(in, "application/rdf+xml").build();
-//        }
-//        return Response.status(Response.Status.NOT_FOUND).build();
-//    }
-        
+    @GET
+    @Produces("application/rdf+xml")
+    @Path("{id}")
+    public Response getAsXML(@PathParam("id") String id) {
+        String requestedUri = ontology.getBase() + "resource/" + id;
+        System.out.println(requestedUri );
+        if(!ontology.getDocuments().containsKey(requestedUri)) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        Response.ResponseBuilder res = Response.ok(ontology.getDocuments().get(requestedUri).asXML(), "application/rdf+xml");
+        res.header("Content-Disposition", "filename= mdq.rdf;");
+        return res.build();
+    }
 
 }
